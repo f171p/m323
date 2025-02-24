@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShoppingCart {
+    private List<String> cartItems;
+    private boolean bookAdded;
+
+    public ShoppingCart() {
+        this.cartItems = new ArrayList<>();
+        this.bookAdded = false;
+    }
+
+    public void addItem(String item) {
+        cartItems.add(item);
+        if (item.toLowerCase().contains("book")) { 
+            bookAdded = true;
+        }
+    }
+
+    public void removeItem(String item) {
+        cartItems.remove(item);
+        if (item.toLowerCase().contains("book")) { 
+            bookAdded = cartItems.stream().anyMatch(i -> i.toLowerCase().contains("book"));
+        }
+    }
+
+    public List<String> getItems() {
+        return new ArrayList<>(cartItems);
+    }
+
+    public double getDiscountPercentage() {
+        return bookAdded ? 5.0 : 0.0;
+    }
+
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Laptop");
+        cart.addItem("Book: Harry Potter");
+        System.out.println("Warenkorb: " + cart.getItems());
+        System.out.println("Rabatt: " + cart.getDiscountPercentage() + "%");
+
+        cart.removeItem("Book: Java");
+        System.out.println("Warenkorb nach Entfernen: " + cart.getItems());
+        System.out.println("Rabatt: " + cart.getDiscountPercentage() + "%");
+    }
+}

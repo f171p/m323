@@ -1,0 +1,17 @@
+import java.util.List;
+
+public class ShoppingCartFunctional {
+    public static double getDiscountPercentage(List<String> cartItems) {
+        return cartItems.stream().anyMatch(item -> item.toLowerCase().contains("book")) ? 5.0 : 0.0;
+    }
+
+    public static void main(String[] args) {
+        List<String> cart = List.of("Laptop", "Book: Harry Pottet");
+        System.out.println("Warenkorb: " + cart);
+        System.out.println("Rabatt: " + getDiscountPercentage(cart) + "%");
+
+        cart = List.of("Laptop", "Phone"); 
+        System.out.println("Warenkorb nach Entfernen des Buchs: " + cart);
+        System.out.println("Rabatt: " + getDiscountPercentage(cart) + "%");
+    }
+}

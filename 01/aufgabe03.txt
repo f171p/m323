@@ -1,0 +1,24 @@
+import java.util.List;
+
+public class TipCalculator {
+    public static int calculateTipPercentage(List<String> names) {
+        if (names.isEmpty()) {
+            return 0; 
+        } else if (names.size() > 5) {
+            return 20;
+        } else {
+            return 10;
+        }
+    }
+
+    public static void main(String[] args) {
+        List<String> group1 = List.of("Bob", "Bobb", "Bobbert");
+        System.out.println("Trinkgeld für Gruppe: " + calculateTipPercentage(group1) + "%");
+
+        List<String> group2 = List.of("Bob", "Bobb", "Bobbert", "Bobberts", "Bobbertino", "Bobbertson");
+        System.out.println("Trinkgeld für grosse Gruppe: " + calculateTipPercentage(group2) + "%");
+
+        List<String> emptyGroup = List.of();
+        System.out.println("Trinkgeld für keine Gruppe: " + calculateTipPercentage(emptyGroup) + "%");
+    }
+}
