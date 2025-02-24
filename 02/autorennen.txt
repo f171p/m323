@@ -1,0 +1,29 @@
+import java.util.List;
+
+public class RaceTimer {
+    
+    public static int calculateTotalTime(List<Integer> lapTimes) {
+        if (lapTimes.size() <= 1) {
+            return 0; 
+        }
+        return lapTimes.stream().skip(1).mapToInt(Integer::intValue).sum();
+    }
+
+    public static double calculateAverageTime(List<Integer> lapTimes) {
+        if (lapTimes.size() <= 1) {
+            return 0.0; 
+        }
+        return lapTimes.stream().skip(1).mapToInt(Integer::intValue).average().orElse(0.0);
+    }
+
+    public static void main(String[] args) {
+        List<Integer> car1Laps = List.of(50, 60, 58, 55, 62); // erste runde ist warmup
+        List<Integer> car2Laps = List.of(45, 57, 59, 61, 63, 60);
+
+        System.out.println("Auto 1 - Gesamtzeit: " + calculateTotalTime(car1Laps) + " Sekunden");
+        System.out.println("Auto 1 - Durchschnittszeit: " + calculateAverageTime(car1Laps) + " Sekunden");
+
+        System.out.println("Auto 2 - Gesamtzeit: " + calculateTotalTime(car2Laps) + " Sekunden");
+        System.out.println("Auto 2 - Durchschnittszeit: " + calculateAverageTime(car2Laps) + " Sekunden");
+    }
+}
